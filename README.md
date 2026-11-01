@@ -12,6 +12,31 @@ A command-line interface for accessing [Filmweb.pl](https://www.filmweb.pl/) dat
 
 ## Installation
 
+### Standalone Executable
+
+No Python needed - download a single-file executable (Python and all dependencies are bundled) from the
+[latest release](https://github.com/elizaluszczyk/filmweb-cli/releases/latest):
+
+| Platform              | File                         |
+|-----------------------|------------------------------|
+| Linux (x86_64)        | `filmweb-linux-x86_64`       |
+| Windows (x86_64)      | `filmweb-windows-x86_64.exe` |
+| macOS (Apple Silicon) | `filmweb-macos-arm64`        |
+| macOS (Intel)         | `filmweb-macos-x86_64`       |
+
+On Linux and macOS make the file executable first:
+
+```bash
+chmod +x filmweb-linux-x86_64
+./filmweb-linux-x86_64 search "one flew"
+```
+
+On macOS, if Gatekeeper blocks the unsigned binary, remove the quarantine flag:
+`xattr -d com.apple.quarantine filmweb-macos-arm64`.
+
+Executables for every commit (not only releases) are available as artifacts of the
+[CI runs](https://github.com/elizaluszczyk/filmweb-cli/actions/workflows/main-ci.yaml).
+
 ### From Source
 
 Clone the repository and install:
@@ -170,6 +195,16 @@ Run linting:
 ```bash
 ruff check src/
 pyrefly check src/
+```
+
+### Building a Standalone Executable
+
+The CI builds the executables with [PyInstaller](https://pyinstaller.org). To build one locally:
+
+```bash
+pip install -r requirements/base.txt pyinstaller
+pyinstaller --onefile --name filmweb --paths src --collect-submodules filmweb_cli src/filmweb_cli/__main__.py
+./dist/filmweb --help
 ```
 
 ## Disclaimer

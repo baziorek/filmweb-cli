@@ -1,3 +1,10 @@
+## [Unreleased]
+
+### Added
+
+- **Standalone executables** - CI builds single-file executables (Linux, Windows, macOS) on every run and attaches them to releases
+- **`python -m filmweb_cli`** - package can be run as a module
+
 ## [1.1.0]
 
 ### Added
